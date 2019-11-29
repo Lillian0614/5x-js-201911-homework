@@ -1,37 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>五倍樂透自動選號機</title>
 </head>
-
 <body>
 
+<script type="text/javascript">
 
+/*
+Q:
+  規則: 從 01 到 49 選出六個不重複數字。
+        Math.random() 會得到一組 0 ~ 1 的隨機亂數。 ( 不包含 1 )
+        用 indexOf(n) 判斷某元素是否存在於陣列內。
+*/
 
-  <script type="text/javascript">
-    /*
-      請完成以下 lottery function，
-      讓使用者在 console 主控台呼叫 lottery() 時可以取得對應的樂透組數。
-      
-      如:
-        lottery(1) ---> 印出一組樂透數字
-        lottery(3) ---> 印出三組樂透數字
-        lottery(5) ---> 印出五組樂透數字
-        
-        lottery() 若是未傳入參數則預設印出一組樂透數字。
-    */
+// todo: 包裝成 function ?
 
-    var lottery = function () {
+var question = prompt("請問想要幾組電腦自動選號?",'');
+var str='', count=0;
+count=Number(question);
+var getLottery = function( count ){
 
+  var lottery = [];
+  var number;
+
+  while( lottery.length < 6 ){
+
+    number = parseInt( Math.random() * 49 + 1, 10 );
+
+    if( lottery.indexOf( number ) === -1 ){
+      lottery.push( number );
     }
+  }
+  return lottery;
 
-  </script>
+};
+// getLottery(10) => 輸出十組數字
+if (count>0){
+    for (var i=1; i<=count; i++){
+      str += "第" + i + "組電腦選號: " + getLottery() + "\n"
+    }
+}
+else{
+  str += "電腦選號: " + getLottery()
+}
 
+alert(str);
+
+</script>
 
 </body>
-
 </html>
